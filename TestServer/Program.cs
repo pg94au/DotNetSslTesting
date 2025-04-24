@@ -30,6 +30,24 @@ internal class Program
             // Remove those roots from the collection of intermediates, and if anything is left those are intermediates.
             intermediateCertificates.RemoveRange(rootCertificates);
 
+            Console.WriteLine("TARGET CERTIFICATE");
+            Console.WriteLine($"  Subject: {targetCertificate.Subject}");
+            Console.WriteLine($"  Issuer: {targetCertificate.Issuer}");
+
+            Console.WriteLine("INTERMEDIATE CERTIFICATES");
+            foreach (var c in intermediateCertificates)
+            {
+                Console.WriteLine($"   Subject: {c.Subject}");
+                Console.WriteLine($"   Issuer: {c.Issuer}");
+            }
+
+            Console.WriteLine("ROOT CERTIFICATES");
+            foreach (var c in rootCertificates)
+            {
+                Console.WriteLine($"   Subject: {c.Subject}");
+                Console.WriteLine($"   Issuer: {c.Issuer}");
+            }
+
             var connectionAcceptor = new ConnectionAcceptor(targetCertificate, intermediateCertificates, rootCertificates);
 
             await connectionAcceptor.RunAsync(cancellationToken);
