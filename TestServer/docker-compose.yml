@@ -1,0 +1,8 @@
+﻿services:
+  testserver:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: final
+    ports:
+      - 8087:8087
